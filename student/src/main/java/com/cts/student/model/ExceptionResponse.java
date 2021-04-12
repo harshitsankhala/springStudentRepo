@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;
 /**
  * 
- * @author 882851
+ * @author Harshit
  * ExceptionResponse class is used for custom exception structure
  */
 public class ExceptionResponse {
