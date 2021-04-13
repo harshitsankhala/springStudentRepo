@@ -1,25 +1,19 @@
 package com.cts.student.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cts.student.model.Student;
-import com.cts.student.service.StudentService;
+import com.cts.student.service.StudentServiceImpl;
 import com.cts.student.service.exception.StudentNotFoundException;
-
-import io.swagger.annotations.Api;
 
 /**
  * 
@@ -31,7 +25,7 @@ import io.swagger.annotations.Api;
 public class StudentController {
 
 	@Autowired
-	StudentService studentService;
+	StudentServiceImpl studentService;
 
 	//https://github.com/harshitsankhala/springStudentRepo.git
 	@GetMapping("/demo")
@@ -56,8 +50,8 @@ public class StudentController {
 	 * @return
 	 * @throws StudentNotFoundException
 	 */
-	@GetMapping("studentByRoll/{rollNumber}")
-	public Student studentByRollNo(@PathVariable Long rollNumber) throws StudentNotFoundException {
+	@GetMapping("studentByRoll")
+	public Student studentByRollNo(@RequestParam Long rollNumber) throws StudentNotFoundException {
 		try {
 			return studentService.studentByRollNo(rollNumber);
 		} catch (StudentNotFoundException e) {
@@ -66,21 +60,7 @@ public class StudentController {
 		}
 	}
 
-	/**
-	 * allStudents method used to return all student details
-	 * 
-	 * @return
-	 * @throws StudentNotFoundException
-	 */
-	@GetMapping("showAllStudent")
-	public List<Student> allStudents() throws StudentNotFoundException {
-		try {
-			return studentService.allStudent();
-		} catch (StudentNotFoundException e) {
-			// TODO Auto-generated catch block
-			throw new StudentNotFoundException("No students");
-		}
-	}
+	
 	
 	/**
 	 * updateDetails method used to update details of student 
@@ -103,8 +83,8 @@ public class StudentController {
 	 * @param rollNumber
 	 * @throws StudentNotFoundException
 	 */
-	@DeleteMapping("/delete/{rollNumber}")
-	public void deleteStudentByRollNo(Long rollNumber) throws StudentNotFoundException
+	@DeleteMapping("/delete")
+	public void deleteStudentByRollNo(@RequestParam Long rollNumber) throws StudentNotFoundException
 	{
 		try {
 		studentService.deleteStudentByRollNo(rollNumber);

@@ -1,7 +1,10 @@
 package com.cts.student.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +12,10 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * 
  * @author Harshit
@@ -17,38 +23,43 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 @Entity
 public class Student {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long rollNumber;
+	@Column
 	@NotBlank(message = "Fist name should not be blank")
 	private String firstName;
+	@Column
 	@NotBlank(message = "Last name should not be blank")
 	private String lastName;
+	@Column
 	@NotBlank(message = "Student class should not be blank")
 	private String studentClass;
-	@JsonFormat(pattern="dd-MM-yyyy")
-	private Date dateOfBirth;
+	@Column
+//	@DateTimeFormat(iso = DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate dateOfBirth;
+	@Column
 	@NotBlank(message = "Created by should not be blank")
 	private String createdBy;
+	@Column
 	@NotBlank(message = "Modified by should not be blank")
 	private String modifiedBy;
-	@JsonFormat(pattern="dd-MM-yyyy")
-	private Date createdDate;
-	
-	
-	
-	
-	@JsonFormat(pattern="dd-MM-yyyy")
-	private Date modifiedDate;
-	
+	@Column
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate createdDate;
+	@Column
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private LocalDate modifiedDate;
+
 	public Student() {
 		super();
 	}
 
 	public Student(@NotNull Long rollNumber, @NotBlank String firstName, @NotBlank String lastName,
-			@NotBlank String studentClass, Date dateOfBirth, @NotBlank String createdBy, @NotBlank String modifiedBy,
-			Date createdDate, Date modifiedDate) {
+			@NotBlank String studentClass, LocalDate dateOfBirth, @NotBlank String createdBy,
+			@NotBlank String modifiedBy, LocalDate createdDate, LocalDate modifiedDate) {
 		super();
 		this.rollNumber = rollNumber;
 		this.firstName = firstName;
@@ -93,11 +104,11 @@ public class Student {
 		this.studentClass = studentClass;
 	}
 
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -117,20 +128,20 @@ public class Student {
 		this.modifiedBy = modifiedBy;
 	}
 
-	public Date getCreatedDate() {
+	public LocalDate getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(LocalDate createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public Date getModifiedDate() {
+	public LocalDate getModifiedDate() {
 		return modifiedDate;
 	}
 
-	public void setModifiedDate(Date modifiedDate) {
+	public void setModifiedDate(LocalDate modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	
+
 }
