@@ -37,6 +37,9 @@ public class Student {
 	@NotBlank(message = "Student class should not be blank")
 	private String studentClass;
 	@Column
+	@NotBlank(message = "Student section should not be blank")
+	private String studentSection;
+	@Column
 //	@DateTimeFormat(iso = DateTimeFormatter.ofPattern("dd-MM-yyyy"))
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dateOfBirth;
@@ -57,14 +60,19 @@ public class Student {
 		super();
 	}
 
-	public Student(@NotNull Long rollNumber, @NotBlank String firstName, @NotBlank String lastName,
-			@NotBlank String studentClass, LocalDate dateOfBirth, @NotBlank String createdBy,
-			@NotBlank String modifiedBy, LocalDate createdDate, LocalDate modifiedDate) {
+	public Student(Long rollNumber, @NotBlank(message = "Fist name should not be blank") String firstName,
+			@NotBlank(message = "Last name should not be blank") String lastName,
+			@NotBlank(message = "Student class should not be blank") String studentClass,
+			@NotBlank(message = "Student section should not be blank") String studentSection, LocalDate dateOfBirth,
+			@NotBlank(message = "Created by should not be blank") String createdBy,
+			@NotBlank(message = "Modified by should not be blank") String modifiedBy, LocalDate createdDate,
+			LocalDate modifiedDate) {
 		super();
 		this.rollNumber = rollNumber;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.studentClass = studentClass;
+		this.studentSection = studentSection;
 		this.dateOfBirth = dateOfBirth;
 		this.createdBy = createdBy;
 		this.modifiedBy = modifiedBy;
@@ -102,6 +110,14 @@ public class Student {
 
 	public void setStudentClass(String studentClass) {
 		this.studentClass = studentClass;
+	}
+
+	public String getStudentSection() {
+		return studentSection;
+	}
+
+	public void setStudentSection(String studentSection) {
+		this.studentSection = studentSection;
 	}
 
 	public LocalDate getDateOfBirth() {
@@ -144,4 +160,15 @@ public class Student {
 		this.modifiedDate = modifiedDate;
 	}
 
+	@Override
+	public String toString() {
+		return "Student [rollNumber=" + rollNumber + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", studentClass=" + studentClass + ", studentSection=" + studentSection + ", dateOfBirth="
+				+ dateOfBirth + ", createdBy=" + createdBy + ", modifiedBy=" + modifiedBy + ", createdDate="
+				+ createdDate + ", modifiedDate=" + modifiedDate + "]";
+	}
+	
+	
+
+	
 }

@@ -3,6 +3,7 @@ package com.cts.student.controller;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import com.cts.student.model.Student;
 import com.cts.student.service.StudentServiceImpl;
 import com.cts.student.service.exception.StudentNotFoundException;
 
+//INC000081798335
 /**
  * 
  * @author harshit
@@ -22,6 +24,7 @@ import com.cts.student.service.exception.StudentNotFoundException;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin("http://localhost:3000")
 public class StudentController {
 
 	@Autowired
@@ -39,7 +42,8 @@ public class StudentController {
 	 * @param student
 	 */
 	@PostMapping("/addDetails")
-	public void addDetails(@Valid @RequestBody Student student) {
+	public void addDetails( @RequestBody Student student) {
+		System.out.println("Its me "+student);
 		studentService.addDetails(student);
 	}
 
@@ -67,7 +71,7 @@ public class StudentController {
 	 * @param student
 	 * @throws StudentNotFoundException
 	 */
-	@PutMapping("/update/{student}")
+	@PutMapping("/update")
 	public void updateDetails(@Valid @RequestBody Student student) throws StudentNotFoundException
 	{
 		try {

@@ -5,6 +5,7 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.TransactionSystemException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +24,11 @@ import com.cts.student.service.exception.StudentNotFoundException;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin("http://localhost:3000")
 public class StudentsController {
 
+	//(CREATED_BY,CREATED_DATE,DATE_OF_BIRTH,FIRST_NAME,LAST_NAME,MODIFIED_BY,MODIFIED_DATE,STUDENT_CLASS)
+	//CREATE TABLE IF NOT EXISTS STUDENT(ROLL_NUMBER INT PRIMARY KEY AUTO_INCREMENT,CREATED_BY VARCHAR(20),CREATED_DATE DATE,DATE_OF_BIRTH DATE,FIRST_NAME VARCHAR(50),LAST_NAME VARCHAR(50),MODIFIED_BY VARCHAR(50),MODIFIED_DATE DATE,STUDENT_CLASS VARCHAR(50));
 	@Autowired
 	StudentServiceImpl studentService;
 
